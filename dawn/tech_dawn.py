@@ -1,4 +1,7 @@
+import urllib
+
 import pandas as pd
+import pymongo
 import requests
 from bs4 import BeautifulSoup
 
@@ -27,19 +30,34 @@ class tech:
         tags_place3 = tags_place2.find('div', {'class': "flex"})
         tags_place4 = tags_place3.find_all('div', {'class': "flex__item w-full"})
         for main_content in tags_place4:
+
             tags_place5 = main_content.find_all('div', {
-                'class': "mb-4 sm-border-b sm-border-b-solid sm-border-b-grey-default"})
+                'class': "mb-4 sm:border-b sm:border-b-solid sm:border-b-grey-default"})
+            # print(tags_place5[1])
+            # break
             for inner_news in tags_place5:
                 tags_place6 = inner_news.find('div', {'class': "flex"})
-                tags_place7 = tags_place6.find_all('div', {'class': "flex__item sm-w-1/4 w-full"})
+                tags_place7 = tags_place6.find_all('div', {'class': "flex__item sm:w-1/4 w-full"})
+                # print(tags_place7[0])
+                # break
                 for all_articl in tags_place7:
                     dic1 = tech.main_tech(all_articl,dic1)
 
-        print("end here")
+        # print("end here")
         print(dic1)
 
-        dataframe = pd.DataFrame.from_dict(dic1)
-        dataframe.to_json('D:/fypnew react/project/NewsBuzz/server/dataFiles/'+self.file+'.json')
+        client = pymongo.MongoClient("mongodb+srv://hussnainkhilgi1:" + urllib.parse.quote(
+            "Pakistan@123") + "@cluster0-011rc.mongodb.net/Newsbuzz?retryWrites=true&w=majority")
+
+        db = client.get_database("Newsbuzz")
+        tech_collection = db.technologies
+        tempDic = {}
+        for member in dic1.keys():
+            tempDic.update(dic1[member])
+            insert_post = tech_collection.update(dic1[member], dic1[member], upsert=True)
+            print(insert_post)
+            # dataframe = pd.DataFrame.from_dict(dic1)
+        # dataframe.to_json('F:\FYP files\scrapping/'+self.file+'.json')
 
 
 
@@ -84,7 +102,7 @@ class tech:
                 # print(all_py.text)
                 temp = all_py.text
                 temp1 = temp1 + temp
-            print(img2)
+            # print(img2)
             new_dic1 = {
                 "tilte": title,
                 "link": link,
@@ -93,6 +111,7 @@ class tech:
             }
             dic1[count] = new_dic1
             count = count + 1
+            print(dic1)
         # print(dic1)
         return dic1
 

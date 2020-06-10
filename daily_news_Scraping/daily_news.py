@@ -1,10 +1,14 @@
+import urllib
 
+import pymongo
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from collections import defaultdict
 # =====function to get data from the extracted links
 def  iterate(internal_link):
+    
+    
     # internal_link = "https://www.dailynews.com/2019/11/11/amazon-confirms-woodland-hills-store-to-replace-old-toys-r-us-near-warner-center/"
     fun_response = requests.get(internal_link)
     fun_data = fun_response.text
@@ -275,8 +279,27 @@ class locala:
             # print("=======33=======")
             # print('section not exist')
         # print(third_section)
-        dataframe = pd.DataFrame.from_dict(dic3)
-        dataframe.to_json('D:/fypnew react/project/NewsBuzz/server/dataFiles/newdata/'+self.file+'.json')
+
+        client = pymongo.MongoClient("mongodb+srv://hussnainkhilgi1:" + urllib.parse.quote(
+            "Pakistan@123") + "@cluster0-011rc.mongodb.net/Newsbuzz?retryWrites=true&w=majority")
+
+        db = client.get_database("Newsbuzz")
+
+        if (self.file == "DailySports"):
+            Scholarship_collection = db.sports
+        elif(self.file == "DailyBussinesss"):
+            Scholarship_collection = db.bussinesses
+        elif (self.file == "DailylocalNews"):
+            Scholarship_collection = db.dawns
+        else:
+            Scholarship_collection = db.dawns
+        tempDic = {}
+        for member in dic3.keys():
+            tempDic.update(dic3[member])
+            insert_post = Scholarship_collection.update(dic3[member], dic3[member], upsert=True)
+            print(insert_post)
+        # dataframe = pd.DataFrame.from_dict(dic3)
+        # dataframe.to_json('F:\FYP files\scrapping/'+self.file+'.json')
 
 
     # =================

@@ -1,4 +1,7 @@
+import urllib
+
 import pandas as pd
+import pymongo
 import requests
 from bs4 import BeautifulSoup
 
@@ -51,8 +54,24 @@ class scholar:
                # print('-----------------------------------------')
 
        # print(dict1)
-        dataframe = pd.DataFrame.from_dict(dict1)
-        # print("the path is = " + 'D:/project/proj/NewsBuzz/server/dataFiles/'+self.file ,'scholarship_news.json' )
-        dataframe.to_json('D:/fypnew react/project/NewsBuzz/server/dataFiles/newdata/'+self.file+'scholarship_news.json')
+
+        client = pymongo.MongoClient("mongodb+srv://hussnainkhilgi1:" + urllib.parse.quote(
+            "Pakistan@123") + "@cluster0-011rc.mongodb.net/Newsbuzz?retryWrites=true&w=majority")
+
+        db = client.get_database("Newsbuzz")
+
+        if (self.file == "MS"):
+            Scholarship_collection = db.msscholarships
+        else:
+            Scholarship_collection = db.bsscholarships
+        tempDic = {}
+        for member in dict1.keys():
+            tempDic.update(dict1[member])
+            insert_post = Scholarship_collection.update(dict1[member], dict1[member], upsert=True)
+            print(insert_post)
+
+        # dataframe = pd.DataFrame.from_dict(dict1)
+        # # print("the path is = " + 'D:/project/proj/NewsBuzz/server/dataFiles/'+self.file ,'scholarship_news.json' )
+        # dataframe.to_json('F:\FYP files\scrapping/newdata/'+self.file+'scholarship_news.json')
 
         #D:\project\proj\newsBuzz\server\dataFiles

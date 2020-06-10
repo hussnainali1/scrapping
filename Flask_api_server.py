@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 
 
 app = Flask(__name__)
-@app.route('/')
+@app.route('//')
 def index():
    main();
    main2();

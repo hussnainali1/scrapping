@@ -1,4 +1,7 @@
+import urllib
+
 import pandas as pd
+import pymongo
 import requests
 from bs4 import BeautifulSoup
 
@@ -13,7 +16,7 @@ class world:
     def main_heading(input_list, dic1, count):
         # print("=============")
         list22 = []
-        print("inside method1")
+        # print("inside method1")
         # print("=============")
         tag_article_data = input_list.find_all("article")
 
@@ -77,7 +80,7 @@ class world:
     def method1(tag_div_array1, dic3, count):
         list2=[]
         counter= count
-        print("=============")
+        # print("=============")
         # print("inside method2 going inside ")
         # print("=============")
         tag_div_array1_div = tag_div_array1.find('div', {'class': "mt-2 slideshow--list"})
@@ -117,7 +120,7 @@ class world:
                 Searchimg2 = Searchimg.find("picture")
                 Searchimg3 = Searchimg2.find("img")
                 img2 = Searchimg3.get("src")
-                print(img2)
+                # print(img2)
 
                 h2_tag = art.find('h2')
 
@@ -183,10 +186,11 @@ class world:
         tags_place2_world = tags_place1_world.find('div', {'class': "content"})
         tags_main_world = tags_place2_world.find("main")
 
-        tag_div_grid = tags_main_world.find_all('div', {'class': "flex"})#big mews container
+        tag_div_grid = tags_main_world.find('div', {'class': "flex"})#big mews container
         #<--------for first element------->
-        tag_div_grid_1 = tag_div_grid[0].find_all('div', {'class': "flex__item sm-w-1/2 w-full"})#left coloum in container
-        # print(tag_div_grid_1[0].text)
+        # print(tag_div_grid)
+        tag_div_grid_1 = tag_div_grid.find_all('div', {'class': "flex__item sm:w-1/2 w-full"})#left coloum in container
+        # print(tag_div_grid_1[0])
         tag_div_grid_newspart = tag_div_grid_1[0].find_all(lambda tag: tag.name == 'div' and
                                         tag.get('class') == ['mb-4'])
         dic1 = {}
@@ -225,8 +229,23 @@ class world:
 
         dic5= world.main_heading(single_div, dic4, count4)
         # print(dic5)
-        dataframe = pd.DataFrame.from_dict(dic4)
-        dataframe.to_json('D:/fypnew react/project/NewsBuzz/server/dataFiles/'+self.file+'.json')
+
+        client = pymongo.MongoClient("mongodb+srv://hussnainkhilgi1:" + urllib.parse.quote(
+            "Pakistan@123") + "@cluster0-011rc.mongodb.net/Newsbuzz?retryWrites=true&w=majority")
+
+        db = client.get_database("Newsbuzz")
+
+
+        Scholarship_collection = db.worldnews
+
+        tempDic = {}
+        for member in dic4.keys():
+            tempDic.update(dic4[member])
+            insert_post = Scholarship_collection.update(dic4[member], dic4[member], upsert=True)
+            print(insert_post)
+
+        # dataframe = pd.DataFrame.from_dict(dic4)
+        # dataframe.to_json('F:\FYP files\scrapping/'+self.file+'.json')
         # print("=========================")
         # print(dic4)
             # inside_div_art = div_art_inside.find('article')

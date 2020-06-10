@@ -1,4 +1,7 @@
+import urllib
+
 import pandas as pd
+import pymongo
 import requests
 from bs4 import BeautifulSoup
 
@@ -36,7 +39,7 @@ class InternationalScholar:
             link = 'https://www.scholarshipportal.com' + link
             "https://www.scholarshipportal.com/scholarship/breast-cancer-car-donations-annual-college-scholarship"
             # print(link)
-            print(link)
+            # print(link)
             fun_response1 = requests.get(link)
             fun_data_des1 = fun_response1.text
             fun_soup_des1 = BeautifulSoup(fun_data_des1, 'html.parser')
@@ -63,9 +66,23 @@ class InternationalScholar:
             dict1[count] = new_dic
             count = count + 1
 
+        client = pymongo.MongoClient("mongodb+srv://hussnainkhilgi1:" + urllib.parse.quote(
+            "Pakistan@123") + "@cluster0-011rc.mongodb.net/Newsbuzz?retryWrites=true&w=majority")
 
-        dataframe = pd.DataFrame.from_dict(dict1)
-        # print("the path is = " + 'D:/project/proj/NewsBuzz/server/dataFiles/' + self.file, 'scholarship_news.json')
-        dataframe.to_json('D:/fypnew react/project/NewsBuzz/server/dataFiles/newdata/' + self.file + 'scholarship_news.json')
+        db = client.get_database("Newsbuzz")
+
+        if (self.file == "MSscholarPortal"):
+            Scholarship_collection = db.msscholarships
+        else:
+            Scholarship_collection = db.bsscholarships
+        tempDic = {}
+        for member in dict1.keys():
+            tempDic.update(dict1[member])
+            insert_post = Scholarship_collection.update(dict1[member], dict1[member], upsert=True)
+            print(insert_post)
+
+        # dataframe = pd.DataFrame.from_dict(dict1)
+        # # print("the path is = " + 'D:/project/proj/NewsBuzz/server/dataFiles/' + self.file, 'scholarship_news.json')
+        # dataframe.to_json('F:\FYP files\scrapping/newdata/' + self.file + 'scholarship_news.json')
 
  #D:\project\proj\newsBuzz\server\dataFiles
