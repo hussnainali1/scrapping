@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index1():
-    return "welcome to Scrapper"
+    return "welcome to Newsbuzz-Scrapper     https://newzbuzz-scrapper.herokuapp.com/scrap  for starting scrapping "
 
 
 @app.route('/scrap')
