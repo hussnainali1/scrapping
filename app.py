@@ -20,4 +20,5 @@ def index():
     return "python server is running and all data is scrapped "
 
 
-app.run(debug=True, host='0.0.0.0', port=Port)
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=Port)
