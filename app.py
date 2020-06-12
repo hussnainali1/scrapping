@@ -1,8 +1,9 @@
 import subprocess
+import os
 from daily_news_Scraping.runScrapping import main
 from scholarship_news.hec_eduvision import main as main2
 from flask import Flask, request, jsonify
-
+Port = int(os.environ.get("PORT", 9000))
 
 app = Flask(__name__)
 
@@ -19,4 +20,4 @@ def index():
     return "python server is running and all data is scrapped "
 
 
-app.run(debug=True, host='localhost', port=5000)
+app.run(debug=True, host='localhost', port=Port)
