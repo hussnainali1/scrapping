@@ -26,7 +26,7 @@ def main():
     #============
     jobs_com = "https://jobs.com.pk/find/"
 
-    # #==================== DAWN NEWS
+    # # #==================== DAWN NEWS
     print("DAWN SPORTS")
     temp = sports(dawn_sports_link, "sports")
     temp.mainMethod1();

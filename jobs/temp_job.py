@@ -16,7 +16,7 @@ from PIL import Image
 import pytesseract as pt
 
 
-pt.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+# pt.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 
 class jobsClass:
