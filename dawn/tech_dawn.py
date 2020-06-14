@@ -5,7 +5,8 @@ import pymongo
 import requests
 from bs4 import BeautifulSoup
 
-   #              <<<<<<<-----------dawn news/tech-------------->>>>>>>> working
+#              <<<<<<<-----------dawn news/tech-------------->>>>>>>> working
+
 
 class tech:
     linktt = ""
@@ -23,12 +24,14 @@ class tech:
 
         soup = BeautifulSoup(data, 'html.parser')
         body_tag = soup.find('body')
-        tags_place1 = body_tag.find('div', {'class': "container-fluid clearfix"})
+        tags_place1 = body_tag.find(
+            'div', {'class': "container-fluid clearfix"})
         # print("here i M ")
         # print(tags_place1)
         tags_place2 = tags_place1.find('main')
         tags_place3 = tags_place2.find('div', {'class': "flex"})
-        tags_place4 = tags_place3.find_all('div', {'class': "flex__item w-full"})
+        tags_place4 = tags_place3.find_all(
+            'div', {'class': "flex__item w-full"})
         for main_content in tags_place4:
 
             tags_place5 = main_content.find_all('div', {
@@ -37,11 +40,12 @@ class tech:
             # break
             for inner_news in tags_place5:
                 tags_place6 = inner_news.find('div', {'class': "flex"})
-                tags_place7 = tags_place6.find_all('div', {'class': "flex__item sm:w-1/4 w-full"})
+                tags_place7 = tags_place6.find_all(
+                    'div', {'class': "flex__item sm:w-1/4 w-full"})
                 # print(tags_place7[0])
                 # break
                 for all_articl in tags_place7:
-                    dic1 = tech.main_tech(all_articl,dic1)
+                    dic1 = tech.main_tech(all_articl, dic1)
 
         # print("end here")
         print(dic1)
@@ -54,12 +58,15 @@ class tech:
         tempDic = {}
         for member in dic1.keys():
             tempDic.update(dic1[member])
-            insert_post = tech_collection.update(dic1[member], dic1[member], upsert=True)
+            try:
+                insert_post = tech_collection.update(
+                    dic1[member], dic1[member], upsert=True)
+
+            except pymongo.errors.DuplicateKeyError:
+                pass
             print(insert_post)
             # dataframe = pd.DataFrame.from_dict(dic1)
         # dataframe.to_json('F:\FYP files\scrapping/'+self.file+'.json')
-
-
 
     def main_tech(input_list, dic1):
         tag_article_data = input_list.find_all("article")
@@ -88,13 +95,15 @@ class tech:
             if not fun_soup_des.find('article', {'class': 'story'}):
                 continue
 
-            fun_upper_div = fun_main_article.find('div', {'class': 'template__main'})
+            fun_upper_div = fun_main_article.find(
+                'div', {'class': 'template__main'})
             if not fun_main_article.find('div', {'class': 'template__main'}):
                 continue
             # print(upper_div.text)
             # print('<<<<<<<===2===>>>>>>')
             # print('<<<<<<<===now divide to a single p tag===>>>>>>')
-            fun_div_des = fun_upper_div.find('div', {'class': 'story__content'})
+            fun_div_des = fun_upper_div.find(
+                'div', {'class': 'story__content'})
             if not fun_upper_div.find('div', {'class': 'story__content'}):
                 continue
             fun_p_article = fun_div_des.find_all('p')
@@ -114,5 +123,3 @@ class tech:
             print(dic1)
         # print(dic1)
         return dic1
-
-
