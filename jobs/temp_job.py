@@ -15,7 +15,7 @@ import shutil
 from PIL import Image
 import pytesseract as pt
 
-
+pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 # pt.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 
