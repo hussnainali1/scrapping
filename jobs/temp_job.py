@@ -143,11 +143,9 @@ class jobsClass:
             try:
                 insert_post = jobs_collection.update(
                     dict1[member], dict1[member], upsert=True)
-                    print(insert_post)
+                print(insert_post)
             except pymongo.errors.DuplicateKeyError:
                 pass
-
-            
 
         #
         # dataframe = pd.DataFrame.from_dict(dict1)
