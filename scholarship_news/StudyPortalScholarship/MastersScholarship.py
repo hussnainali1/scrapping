@@ -88,10 +88,9 @@ class InternationalScholar:
             try:
                 insert_post = Scholarship_collection.update(
                     dict1[member], dict1[member], upsert=True)
+                print(insert_post)
             except pymongo.errors.DuplicateKeyError:
                 pass
-
-            print(insert_post)
 
         # dataframe = pd.DataFrame.from_dict(dict1)
         # # print("the path is = " + 'D:/project/proj/NewsBuzz/server/dataFiles/' + self.file, 'scholarship_news.json')

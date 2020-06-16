@@ -245,6 +245,7 @@ class world:
             try:
                 insert_post = Scholarship_collection.update(
                     dic4[member], dic4[member], upsert=True)
+                print(insert_post)
             except pymongo.errors.DuplicateKeyError:
                 pass
             print(insert_post)

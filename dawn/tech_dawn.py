@@ -61,10 +61,10 @@ class tech:
             try:
                 insert_post = tech_collection.update(
                     dic1[member], dic1[member], upsert=True)
-
+                print(insert_post)
             except pymongo.errors.DuplicateKeyError:
                 pass
-            print(insert_post)
+
             # dataframe = pd.DataFrame.from_dict(dic1)
         # dataframe.to_json('F:\FYP files\scrapping/'+self.file+'.json')
 
