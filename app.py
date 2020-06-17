@@ -13,9 +13,14 @@ def index1():
     return "welcome to Newsbuzz-Scrapper     https://newzbuzz-scrapper.herokuapp.com/scrap  for starting scrapping "
 
 
-@app.route('/scrap')
+@app.route('/scrap1')
 def index():
     main()
+    return "python server is running and all data is scrapped "
+
+
+@app.route('/scrap2')
+def index2():
     main2()
     return "python server is running and all data is scrapped "
 
