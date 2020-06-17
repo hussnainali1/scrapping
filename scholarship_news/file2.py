@@ -24,16 +24,6 @@ def main():
     jobs_com = "https://jobs.com.pk/find/"
 
     # # #==================== DAWN NEWS
-    print("DAWN SPORTS")
-    temp = sports(dawn_sports_link, "sports")
-    temp.mainMethod1();
-    print("DAWN TECHOLOGY")
-    temp = tech(dawn_tech_link, "technology")
-    temp.mainMethod1();
-    print("DAWN WORLD NEWS")
-    temp = world(dawn_world_link, "worlds")
-    temp.mainMethod();
-
 
 
     # #===========
@@ -48,7 +38,7 @@ def main():
     temp.mainProMethod();
 
 
-    ==================== JOBS NEWS
+    # ==================== JOBS NEWS
     print("Jobs News")
     temp = jobsClass(jobs_com, "Jobs")
     temp.mainPro()
