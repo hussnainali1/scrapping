@@ -2,6 +2,8 @@ import subprocess
 import os
 from daily_news_Scraping.runScrapping import main
 from scholarship_news.hec_eduvision import main as main2
+from scholarship_news.file2 import main as main3
+
 from flask import Flask, request, jsonify
 Port = int(os.environ.get("PORT", 9000))
 
@@ -22,6 +24,12 @@ def index():
 @app.route('/scrap2')
 def index2():
     main2()
+    return "python server is running "
+
+
+@app.route('/scrap3')
+def index3():
+    main3()
     return "python server is running and all data is scrapped "
 
 
