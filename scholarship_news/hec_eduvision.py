@@ -14,14 +14,14 @@ def main():
     linkInternationalStudyPortal_ms = "https://www.scholarshipportal.com/master/scholarships/united-states"
     linkInternationalStudyPortal_bs = "https://www.scholarshipportal.com/bachelor/scholarships/"
     # ==================== admissions
-    link_bs_admissions = "https://www.eduvision.edu.pk/admissions.php?discipline_type=&sub_level=7&city=&pageNo=1"
-    link_ms_admissons = "https://www.eduvision.edu.pk/admissions.php?discipline_type=&sub_level=3&city=&pageNo=1"
-    # ====================
-    dawn_tech_link = "https://www.dawn.com/tech"
-    dawn_world_link = "https://www.dawn.com/world"
-    dawn_sports_link = "https://www.dawn.com/sport"
-    # ============
-    jobs_com = "https://jobs.com.pk/find/"
+    # link_bs_admissions = "https://www.eduvision.edu.pk/admissions.php?discipline_type=&sub_level=7&city=&pageNo=1"
+    # link_ms_admissons = "https://www.eduvision.edu.pk/admissions.php?discipline_type=&sub_level=3&city=&pageNo=1"
+    # # ====================
+    # dawn_tech_link = "https://www.dawn.com/tech"
+    # dawn_world_link = "https://www.dawn.com/world"
+    # dawn_sports_link = "https://www.dawn.com/sport"
+    # # ============
+    # jobs_com = "https://jobs.com.pk/find/"
 
     # # #==================== DAWN NEWS
     # print("DAWN SPORTS")

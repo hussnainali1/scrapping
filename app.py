@@ -20,25 +20,25 @@ def index1():
 @app.route('/scrap1')
 def index():
     main()
-    return "python server is running and all data is scrapped "
+    return "python server Scrap Dailynews data "
 
 
 @app.route('/scrap2')
 def index2():
     main2()
-    return "python server is running "
+    return "python server Scrap Scholarship data "
 
 
 @app.route('/scrap3')
 def index3():
     main3()
-    return "python server is running and all data is scrapped "
+    return "python server scrap admission and JObs data "
+
 
 @app.route('/scrap4')
 def index4():
     main4()
-    return "python server is running and all data is scrapped "
-
+    return "python server scrap DAWN news data"
 
 
 if __name__ == "__main__":

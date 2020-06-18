@@ -26,9 +26,9 @@ def main():
     temp.mainProMethod()
 
     # ==================== JOBS NEWS
-    # print("Jobs News")
-    # temp = jobsClass(jobs_com, "Jobs")
-    # temp.mainPro()
+    print("Jobs News")
+    temp = jobsClass(jobs_com, "Jobs")
+    temp.mainPro()
 
 
 if __name__ == '__main__':
