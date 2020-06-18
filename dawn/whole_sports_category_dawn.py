@@ -17,7 +17,7 @@ class sports:
         self.file = file
 
     def mainMethod1(self):
-        print("inside")
+        # print("inside")
         i = 1
         # social_link = 'https://www.dawn.com/news/1514598/maulanas-pragmatism'
 
@@ -82,7 +82,7 @@ class sports:
                         'div', {'class': 'story__content'})
                     p_article = div_des.find_all('p')
 
-                    print("----", i, "-----")
+                    # print("----", i, "-----")
                     i += 1
                     for p_data in p_article:
                         temp1 = p_data.text
@@ -109,7 +109,7 @@ class sports:
             try:
                 insert_post = tech_collection.update(
                     dic1[member], dic1[member], upsert=True)
-                print(insert_post)
+                # print(insert_post)
             except pymongo.errors.DuplicateKeyError:
                 pass
 
