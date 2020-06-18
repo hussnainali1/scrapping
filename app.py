@@ -3,6 +3,8 @@ import os
 from daily_news_Scraping.runScrapping import main
 from scholarship_news.hec_eduvision import main as main2
 from scholarship_news.file2 import main as main3
+from scholarship_news.file1 import main as main4
+
 
 from flask import Flask, request, jsonify
 Port = int(os.environ.get("PORT", 9000))
@@ -31,6 +33,12 @@ def index2():
 def index3():
     main3()
     return "python server is running and all data is scrapped "
+
+@app.route('/scrap4')
+def index4():
+    main4()
+    return "python server is running and all data is scrapped "
+
 
 
 if __name__ == "__main__":
