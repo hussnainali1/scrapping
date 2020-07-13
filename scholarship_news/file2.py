@@ -12,11 +12,11 @@ def main():
     # ============
     jobs_com = "https://jobs.com.pk/find/"
 
-    # # #==================== DAWN NEWS
+    # #==================== DAWN NEWS
 
-    # #===========
+    # ===========
 
-    # #==================== Admissions ================
+    # ==================== Admissions ================
     print("BS Admissions")
     temp = admission(link_bs_admissions, "BS")
     temp.mainProMethod()
